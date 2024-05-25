@@ -1,0 +1,10 @@
+pydantic-settings
+asyncpg
+fastapi
+requests
+uvicorn
+aiokafka
+kafka-python
+brotli
+motor
+umongo
