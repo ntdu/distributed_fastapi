@@ -15,12 +15,11 @@ class Season(BaseModel):
         use_enum_values = True
 
 # Shared properties
-class ThingsHistoryBase(BaseModel):
-    # _id: Optional[UUID] = None
+class TravelRecommendationBase(BaseModel):
     country: str
     season: Optional[str] = None
 
-class ThingsHistoryCreate(ThingsHistoryBase):
+class TravelRecommendationCreate(TravelRecommendationBase):
     season: str
 
     @validator('season')

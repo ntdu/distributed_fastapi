@@ -19,7 +19,7 @@ def validate_choices(choices: List[str]):
     return validator
 
 @mongo_instance.register
-class ThingsHistory(BaseDateTimeModel):
+class TravelRecommendation(BaseDateTimeModel):
     status = fields.StringField(default=Status.PENDING.value,
                                 validate=validate_choices([Status.PENDING.value, Status.COMPLETED.value]))
     country = fields.StringField(required=True)
@@ -31,7 +31,7 @@ class ThingsHistory(BaseDateTimeModel):
                                     Season.WINTER.value]))
 
     class Meta:
-        collection_name = 'ThingsHistory'
+        collection_name = 'TravelRecommendation'
 
     @classmethod
     async def create_update(cls, data: dict):

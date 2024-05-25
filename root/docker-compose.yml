@@ -26,13 +26,29 @@ services:
     depends_on:
         - zookeeper
 
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: tasks
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
+
   backend-api-service:
-    # build:
-    #     context: .
-    #     dockerfile: ./services/backend-api-service/Dockerfile
     build:
-        context: ./services/backend-api-service
-        dockerfile: Dockerfile
+      context: ./services/backend-api-service
+      dockerfile: Dockerfile
     command: uvicorn src.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
     ports:
       - 8080:8000
@@ -42,32 +58,14 @@ services:
       - ./core:/usr/src/app/core
 
     environment:
-        - KAFKA_HOST=kafka
-        - KAFKA_PORT=9092
-        - DB_MONGO_USERNAME=root
-        - DB_MONGO_PASSWORD=example
-        - DB_MONGO_HOST=mongo
-        - DB_MONGO_PORT=27017
-        - DB_MONGO_DB_NAME=tasks
+      - KAFKA_HOST=kafka
+      - KAFKA_PORT=9092
+      - DB_MONGO_USERNAME=root
+      - DB_MONGO_PASSWORD=example
+      - DB_MONGO_HOST=mongo
+      - DB_MONGO_PORT=27017
+      - DB_MONGO_DB_NAME=tasks
     depends_on:
-        - kafka
-        - zookeeper
-
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-        MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: example
-        MONGO_INITDB_DATABASE: tasks
-
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-        - 8081:8081
-    environment:
-        ME_CONFIG_MONGODB_ADMINUSERNAME: root
-        ME_CONFIG_MONGODB_ADMINPASSWORD: example
-        ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
-        ME_CONFIG_BASICAUTH: false
+      - kafka
+      - zookeeper
+      - mongodb
