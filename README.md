@@ -58,7 +58,7 @@ OPENAI_API_KEY=
 
 2. Documents for testing can be found at here:
 ``` http://127.0.0.1:3000/docs```
-![My docs](images/docs.png)
+![My docs](root/images/docs.png)
 
 ## <a id="continuous-integration"> Continuous Integration</a>
 tbd
