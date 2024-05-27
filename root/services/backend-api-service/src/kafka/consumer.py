@@ -34,14 +34,14 @@ async def consume():
     try:
         async for msg in consumer:
             value = await decompress(msg.value)
-            print(
-                "consumed: ",
-                f"topic: {msg.topic},",
-                f"partition: {msg.partition},",
-                f"offset: {msg.offset},",
-                f"key: {msg.key},",
-                f"value: {value},",
-                f"timestamp: {msg.timestamp}",
+            logger.info(
+                f"""consumed:
+                    topic: {msg.topic},
+                    partition: {msg.partition},
+                    offset: {msg.offset},
+                    key: {msg.key},
+                    value: {value},
+                    timestamp: {msg.timestamp}""",
             )
             value_json = json.loads(value)
             await update_recommendations(value_json)

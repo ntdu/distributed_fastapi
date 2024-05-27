@@ -3,6 +3,7 @@
 import logging
 import aiohttp
 import async_timeout
+from core.exceptions.connector import CallAPIFail
 
 from typing import Any, Dict, List
 
@@ -30,22 +31,18 @@ class BaseApiConnector:
     ):
         if not method or not url:
             raise ValueError(f'missing {method=} or {url}')
-        try:
-            res = None
-            with async_timeout.timeout(request_timeout):
-                async with aiohttp.ClientSession() as session:
-                    request = getattr(session, method.lower())
-                    async with request(url, json=payload, headers=headers, params=params) as response:
-                        if return_json:
-                            if response.status in (200, 201,):
-                                res = await response.json()
-                            else:
-                                self.logger.error(f'{self.__class__.__class__} fetch failed -> {res=}')
 
+        with async_timeout.timeout(request_timeout):
+            async with aiohttp.ClientSession() as session:
+                request = getattr(session, method.lower())
+                async with request(url, json=payload, headers=headers, params=params) as response:
+                    if return_json:
+                        if response.status in (200, 201,):
+                            res = await response.json()
                         else:
-                            res = response
+                            raise CallAPIFail(f'{self.__class__.__class__} fetch failed -> {res=}')
 
-            return res
-        except Exception as e:
-            logger.exception(f'get exception {e}')
-            return
+                    else:
+                        res = response
+
+        return res

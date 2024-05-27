@@ -8,4 +8,4 @@ class ItemNotFound(Exception):
         return {
             "error": "UID not found",
             "message": "The provided UID does not exist. Please check the UID and try again."
-        } 
+        }

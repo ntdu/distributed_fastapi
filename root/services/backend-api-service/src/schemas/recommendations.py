@@ -16,7 +16,6 @@ class Season(BaseModel):
 
 # Shared properties
 class TravelRecommendationBase(BaseModel):
-    id: Optional[str] = None
     country: str
     season: Optional[str] = None
 
