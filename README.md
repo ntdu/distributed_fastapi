@@ -53,10 +53,10 @@ OPENAI_API_KEY=
 
 ## Usage
 1. Using curl or other tools, you can send requests to the endpoints through methods defined here:
-``` http://127.0.0.1:3000/```
+```http://127.0.0.1:3000/```
 
 2. Documents for testing can be found at here:
-``` http://127.0.0.1:3000/docs```
+```http://127.0.0.1:3000/docs```
 ![My docs](root/images/docs.png)
 
 ## <a id="continuous-integration"> Continuous Integration</a>
