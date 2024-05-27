@@ -37,11 +37,6 @@ We used kafka as the broker to connect two service. This architect allows us sca
 
 ### <a id="local-setup"> Setup</a>
 tbd
-### <a id="docker-setup"> Setup ENV</a>
-Update configuration in:
-```bash
-OPENAI_API_KEY=
-```
 
 ## <a id="running-on-docker"> Running On Docker</a>
 ### <a id="docker-prerequisites"> Prerequisites</a>
@@ -49,8 +44,12 @@ OPENAI_API_KEY=
   - Docker-compose - [Install Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04)
 
 ### <a id="docker-setup"> Setup</a>
-1. Build:  `docker-compose build`
-2. Run: `docker-compose up`
+1. Create .env file same as .env.sample in the root folder and update the values
+```bash
+OPENAI_API_KEY=
+```
+2. Build:  `docker-compose build`
+3. Run: `docker-compose up`
 
 ## Usage
 1. Using curl or other tools, you can send requests to the endpoints through methods defined here:
