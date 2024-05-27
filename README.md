@@ -1,14 +1,15 @@
 # ️⚡️ FastAPI Distributed Microserver ⚡️
 
 ## Project Description
-FastAPI Distributed Microserver suggest places to travel based on country and season.
+The FastAPI Distributed Microservice suggests travel destinations based on the user's chosen country and preferred season.
 
-The project built on microservice architecture, compose two services: backend-api service and consumer service
+The project is built on a microservice architecture and consists of two services: a backend-API service and a consumer service.
 
-Backend-api service provides endpoints to get country and season from client, and then respond travel recommendations.
-Consumer service responsible for integrating with third-party to collect required informations, then send them back to the backend-api service.
+The backend-API service provides endpoints to receive a user's chosen country and season from the client. It then responds with travel recommendations.
 
-We used kafka as the broker to connect two service. This architect allows us scale up horizontally by adding more consumer to broker
+The consumer service is responsible for integrating with third-party services to collect the necessary information. This information is then sent back to the backend-API service.
+
+We use Kafka as a broker to connect the two services. This architecture allows for horizontal scaling by adding more consumer services to the broker.
 
 ## Table of Content
 * [Project Description](#project-description)
@@ -22,7 +23,6 @@ We used kafka as the broker to connect two service. This architect allows us sca
   + [Continuous Integration](#continuous-integration)
   + [Continuous Deployment](#continuous-deployment)
 
-    
 
 ## <a id="getting-started"> Getting Started </a>
 
