@@ -10,7 +10,6 @@ def create_application() -> FastAPI:
     """
 
     application = FastAPI(
-        openapi_url="/kafka_producer/openapi.json",
         docs_url="/docs",
         on_startup=startup_events,
         on_shutdown=shutdown_events,
