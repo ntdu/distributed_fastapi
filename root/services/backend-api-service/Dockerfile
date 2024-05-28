@@ -10,12 +10,12 @@ ENV PYTHONUNBUFFERED 1
 
 # install system dependencies
 RUN apt-get update \
-    && apt-get -y install kafkacat \
+    && apt-get -y install kafkacat gcc\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # install python dependencies
-RUN pip install --upgrade pip 
+RUN pip install --upgrade pip
 # COPY ../services/backend-api-service/requirements.txt .
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt --no-cache-dir

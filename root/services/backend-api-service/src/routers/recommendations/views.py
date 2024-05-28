@@ -1,13 +1,12 @@
-import json
-from fastapi import APIRouter, Depends, Request, Response, status, HTTPException
-from bson.objectid import ObjectId
+# from prefect import flow, task
+from fastapi import APIRouter, status, BackgroundTasks
+
 from src.models import TravelRecommendation
 from src.schemas.recommendations import TravelRecommendationCreate
 from core.exceptions.database import ItemNotFound
 from core.response.http_response import custom_response
 from core.enumerations.recommendations import Status
-from src.kafka import producer, compress
-
+from src.utils import producer_send_data
 
 router = APIRouter(prefix="/api/v1/travel-recommendations", tags=["Recommendations"])
 
@@ -39,7 +38,8 @@ async def get_travel_recommendations(
 
 @router.post('/')
 async def generate_travel_recommendations(
-    data_in: TravelRecommendationCreate
+    data_in: TravelRecommendationCreate,
+    background_tasks: BackgroundTasks
 ):
     try:
         new_collection = await TravelRecommendation.create_update(data_in)
@@ -53,7 +53,7 @@ async def generate_travel_recommendations(
         'country': new_collection.get('country'),
         'season': new_collection.get('season')
     }
-    await producer.send_and_wait("jobs", await compress(json.dumps(data)))
+    background_tasks.add_task(producer_send_data, data)
     return custom_response({
         "uid": uid
     })

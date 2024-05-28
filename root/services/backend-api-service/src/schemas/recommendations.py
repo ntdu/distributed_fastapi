@@ -1,10 +1,6 @@
 from typing import Optional, List
-from uuid import UUID
-from datetime import datetime
 
-from pydantic import BaseModel
-from pydantic import BaseModel, validator, Field
-from typing import List, Optional
+from pydantic import BaseModel, validator
 from core.enumerations import recommendations
 
 class Season(BaseModel):
