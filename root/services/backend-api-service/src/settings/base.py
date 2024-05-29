@@ -1,9 +1,12 @@
 import os
+from typing import Optional
 from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     """Class for storing settings."""
+
+    APP_ENV: Optional[str] = os.getenv("APP_ENV", 'dev')
 
     kafka_host: str = os.getenv("KAFKA_HOST")
     kafka_port: str = os.getenv("KAFKA_PORT")
@@ -17,3 +20,5 @@ class Settings(BaseSettings):
     DB_MONGO_USERNAME: str = os.getenv("DB_MONGO_USERNAME")
     DB_MONGO_PASSWORD: str = os.getenv("DB_MONGO_PASSWORD")
     DB_MONGO_DB_NAME: str = os.getenv("DB_MONGO_DB_NAME")
+
+    SENTRY_SDK_DSN: Optional[str] = os.getenv("SENTRY_SDK_DSN")

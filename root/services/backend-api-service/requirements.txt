@@ -9,3 +9,4 @@ brotli
 motor
 umongo
 prefect
+sentry-sdk[fastapi]
