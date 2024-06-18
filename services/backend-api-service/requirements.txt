@@ -1,0 +1,14 @@
+pydantic-settings
+asyncpg
+fastapi
+requests
+uvicorn
+aiokafka
+kafka-python
+brotli
+motor
+umongo
+prefect
+sentry-sdk[fastapi]
+boto3
+python-multipart
